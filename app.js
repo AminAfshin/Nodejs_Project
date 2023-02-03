@@ -1,9 +1,14 @@
 const path = require("path");
 
 const express = require("express");
+const dotEnv = require("dotenv");
+
 const indexRouter = require("./routes");
 
 const app = express();
+
+//* load config
+dotEnv.config({ path: ".config/config.env" });
 
 //* View Engines
 app.set("view engine", "ejs");
@@ -15,6 +20,8 @@ app.use(express.static(path.join(__dirname, "public")));
 //*Routes
 app.use(indexRouter);
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running in ${process.env.NODE_ENV} mode on port ${PORT}`);
 });
