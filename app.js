@@ -1,6 +1,7 @@
 const path = require("path");
 
 const express = require("express");
+const expressLayouts = require("express-ejs-layouts");
 const dotEnv = require("dotenv");
 const morgan = require("morgan");
 
@@ -21,7 +22,9 @@ dotEnv.config({ path: "./config/config.env" });
 connectDB();
 
 //* View Engines
+app.use(expressLayouts);
 app.set("view engine", "ejs");
+app.set("layout", "./layouts/mainLayout");
 app.set("views", "views");
 
 //*Statics
