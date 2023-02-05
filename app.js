@@ -5,8 +5,9 @@ const expressLayouts = require("express-ejs-layouts");
 const dotEnv = require("dotenv");
 const morgan = require("morgan");
 
-const indexRouter = require("./routes");
+const blogRouter = require("./routes/blog");
 const connectDB = require("./config/db");
+const dashRouter = require("./routes/dashboard");
 
 const app = express();
 
@@ -31,7 +32,8 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 
 //*Routes
-app.use(indexRouter);
+app.use("/dashboard", dashRouter);
+app.use(blogRouter);
 
 const PORT = process.env.PORT || 3000;
 
